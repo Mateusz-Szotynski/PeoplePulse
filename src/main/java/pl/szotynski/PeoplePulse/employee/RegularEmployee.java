@@ -4,8 +4,8 @@ package pl.szotynski.PeoplePulse.employee;
 public final class RegularEmployee extends Employee {
 
     public static class RegularEmployeeBuilder extends Builder<RegularEmployeeBuilder> {
-        public RegularEmployeeBuilder(String firstName, String lastName, String contactNumber) {
-            super(firstName, lastName, contactNumber);
+        public RegularEmployeeBuilder(String firstName, String lastName, String contactNumber, String personalEmail) {
+            super(firstName, lastName, contactNumber, personalEmail);
         }
 
         @Override

@@ -24,31 +24,27 @@ public abstract class Employee {
         private Department department;
         private LocalDate startDate;
 
-        public Builder(String firstName, String lastName, String contactNumber) {
-            if (!firstName.isBlank()) {
-                this.firstName = Objects.requireNonNull(firstName);
+        public Builder(String firstName, String lastName, String contactNumber, String personalEmail) {
+            if (firstName != null && !firstName.isBlank()) {
+                this.firstName = firstName;
             } else {
                 throw new EmployeeInvalidData("First name must contain value");
             }
-            if (!lastName.isBlank()) {
-                this.lastName = Objects.requireNonNull(lastName);
+            if (lastName != null && !lastName.isBlank()) {
+                this.lastName = lastName;
             } else {
                 throw new EmployeeInvalidData("Last name must contain value");
             }
-            if (!contactNumber.isBlank()) {
-                this.contactNumber = Objects.requireNonNull(contactNumber);
+            if (contactNumber != null && !contactNumber.isBlank()) {
+                this.contactNumber = contactNumber;
             } else {
                 throw new EmployeeInvalidData("Contact number must contain value");
             }
-        }
-
-        public T personalEmail(String email) {
-            if (!email.isBlank()) {
-                this.personalEmail = Objects.requireNonNull(email);
+            if (personalEmail != null && !personalEmail.isBlank()) {
+                this.personalEmail = personalEmail;
             } else {
-                throw new EmployeeInvalidData("Email must contain value");
+                throw new EmployeeInvalidData("Personal Email must contain value");
             }
-            return self();
         }
 
         public T title(String title) {
@@ -89,5 +85,15 @@ public abstract class Employee {
         return String.format("%s %s", firstName, lastName);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Employee employee)) return false;
+        return Objects.equals(personalEmail, employee.personalEmail);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(personalEmail);
+    }
 }
